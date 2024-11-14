@@ -2,18 +2,20 @@
 # name of the character.
 
 define action = Character("Action:", color='#25ecec')
+define note = Character("Introduction note:")
 define o = Character("Overseer", color="#22FF22")
-define enforcer = Character("Enforcer", color="#FF2222")
-define guard = Character("Guard", color="#FF2222")
-define umbrasius = Character("Umbrasius", color="#2277FF")
-define bartender = Character("Bartender", color="#22FF22")
-define aaron = Character("Aaron", color="#FF2222")
-define camreal = Character("Camreal", color="#2277FF")
+define e = Character("Enforcer", color="#FF2222")
+define g = Character("Guard", color="#FF2222")
+define u = Character("Umbrasius", color="#2277FF")
+define b = Character("Bartender", color="#22FF22")
+define a = Character("Aaron", color="#FF2222")
+define c = Character("Camreal", color="#2277FF")
 image bg vexation = "bg/vexation.png"
 image bg base = "bg/base.png"
 image bg bar = "bg/bar.png"
 image bg map001 = Frame("map/map001.png")
-image bg escape = "bg/escape.png"
+image bg escapeA = "bg/escape.png"
+image bg escapeB = im.Flip("bg/escape.png", horizontal="True")
 image locked = "token/locked.png"
 image poi = "token/poi.png"
 image squad = "token/squad.png"
@@ -29,25 +31,14 @@ image r2l = Text("R2", color='#eb1f1f')
 
 label c1:
 
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
+    play music "andromeda.mp3" if_changed
 
     scene bg vexation with fade:
         fit "cover"
 
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
-
-    
-    # show eileen happy
-
-    # These display lines of dialogue.
-
     " C1 – Credits and Brimstone" "Location: Vexation, Fury’s Fall, Brimstone Base.\nYear: 1001 ATA."
     
-    "\[The main entrance to the scorching sulfur-engulfed hangar area shuts behind you.\]"
+    "The main entrance to the scorching sulfur-engulfed hangar area shuts behind you."
     
     show overseer at left 
     o "Ah, fresh meat! Welcome to Brimstone, outer suburb of hell and the closest viable settlement to the Burning Suns. Population: none of your damn business. If you'll step right along to the elevator, we can begin the process of getting you oriented"
@@ -60,27 +51,27 @@ label c1:
     
     o "Speaking of rules, we do have a few. First and foremost, some security precautions. Can't be too careful when there's..."
     
-    show guard at right
-    guard "Step aside, spread out and don’t move."
+    show g at right
+    g "Step aside, spread out and don’t move."
     
     hide overseer
-    guard "Hand over your identification and your weapons. We will withhold these till you leave this area of the base again."
+    g "Hand over your identification and your weapons. We will withhold these till you leave this area of the base again."
     
-    show enforcer at left
-    enforcer "Delay that order. There will be no inspection for now. We have been ordered to permanently confiscate all weapons from all visitors, no exceptions."
+    show e at left
+    e "Delay that order. There will be no inspection for now. We have been ordered to permanently confiscate all weapons from all visitors, no exceptions."
     
     menu:
         action "Every player must put aside all their cards with weapon classification. They must not be used for now."
         "Done":
-            enforcer "And any neomorph or champions are to hand over all their gear as well. We don't trust those warmongering snakes."
+            e "And any neomorph or champions are to hand over all their gear as well. We don't trust those warmongering snakes."
             
     menu:
         action "Every neomorph and champion player must also put aside all their gear cards. They must not be used for now."
         "Done":
-            enforcer "Good. Now move along."
+            e "Good. Now move along."
             
-    hide guard
-    hide enforcer
+    hide g
+    hide e
     show bg base
     show overseer at left
     o """
@@ -99,20 +90,20 @@ label c1:
     
     scene bg bar with fade:
         fit "cover"
-    "\[The noise from the speakers and crowds intensifies as you approach the bar area.\]"
+    "The noise from the speakers and crowds intensifies as you approach the bar area."
     
-    show bartender at right
-    bartender "Welcome outlanders, what’ll it be? If you don’t mind a strong aftertaste, I have a newly imported Marauder rum from Hel’s Market on Asgard."
+    show b at right
+    b "Welcome outlanders, what’ll it be? If you don’t mind a strong aftertaste, I have a newly imported Marauder rum from Hel’s Market on Asgard."
     
-    "\[The bartender waves you to the bar again.\]"
+    "The bartender waves you to the bar again."
     
-    bartender "Here’s your drink."
+    b "Here’s your drink."
     play sound "beep.wav"
-    bartender "You have a personal call on the comm. Let me reroute it to your device, just a second."
+    b "You have a personal call on the comm. Let me reroute it to your device, just a second."
     
-    hide bartender
-    show umbrasius at left
-    umbrasius """
+    hide b
+    show u at left
+    u """
     Greetings, Commander. I’m pleased to hear you've already assembled a team. As you can imagine, with so many factions on the warpath, it is almost impossible to find unaffiliated agents through our regular channels.
     
     But let's get straight to business. The Neomorph Polity is deeply concerned by the Assembly’s failure to control the unprovoked aggression of our enemies.
@@ -127,8 +118,11 @@ label c1_play:
         xanchor 0 yanchor 0
         xpos 0 ypos 0 #zoom 0.83
         #linear 3.0 xpos 60 ypos 0
-        
-    action "Open the map book at map 001"
+    
+    menu:
+        action "Open the map book at map 001."
+        "Done":
+            $ dummy = 1 # no op
     
     menu:
         action "Take 3 Blocked Entrances, 1 POI, the player standees and the turn marker."
@@ -173,14 +167,18 @@ label player_select:
     pause
     
     window show
-    show umbrasius at left
-    umbrasius "Vexation is a wretched place to find yourself delayed, but that is the situation I find myself in. Rendezvous with me at my location and I'll explain further. Don't dally, Commander - I have no desire to stay in this garbage incinerator of a system a second longer than necessary."
+    show u at left
+    u """
+    Vexation is a wretched place to find yourself delayed, but that is the situation I find myself in. Rendezvous with me at my location and I'll explain further.
     
-    hide umbrasius
+    Don't dally, Commander - I have no desire to stay in this garbage incinerator of a system a second longer than necessary.
+    """
+    
+    hide u
     hide squad
     
     menu:
-        "Introduction note:" "a) Adjacent does not mean “on top of”, though it is legal with a borderless POI like here.\nb) In the beginning of each new mission, you always select a Commander. This player will call the shots when mutual agreements cannot be made, or in cases where the team must vote on decisions."
+        note "a) Adjacent does not mean “on top of”, though it is legal with a borderless POI like here.\nb) In the beginning of each new mission, you always select a Commander. This player will call the shots when mutual agreements cannot be made, or in cases where the team must vote on decisions."
         
         "Success: Get the commander adjacent to the point of interest (POI)":
             jump c1_mu1
@@ -190,8 +188,10 @@ label player_select:
             
 label c1_mu1:
     hide turn
-    "Remove 1 POI and 1 Blocked Entrance"
-    window hide
+    menu:
+        action "Remove the following: 1 POI and 1 Blocked Entrance"
+        "Next":
+            window hide
     hide poi with dissolve
     pause
     hide l1 with dissolve
@@ -220,8 +220,8 @@ label c1_mu1:
             pause
             
     window show
-    show umbrasius at left
-    umbrasius """
+    show u at left
+    u """
     Good to see you in person, Commander. My agent promised me a competent team, but let's not get ahead of ourselves. When I arrived, these Hellfire thugs confiscated my ship and equipment, and I now see they're doing it to everyone.
     
     Perhaps they're running low on resources? In any case, I’m not interested in their petty problems. If they want to steal my ship it'll be over my dead body… or more precisely, over a lot of other dead bodies.
@@ -229,9 +229,9 @@ label c1_mu1:
     Get into their enclave and hack their console so that you’ll be able to retrieve our stuff. And don’t let anyone get in your way.
     """
     
-    hide umbrasius
+    hide u
     menu:
-        "Introduction note:" "Opening, disabling and hacking are all achieved by successfully interacting with the object in question."
+        note "Opening, disabling and hacking are all achieved by successfully interacting with the object in question."
         
         "Success: Open the door and disable the console.":
             play sound "open_safe.wav"
@@ -244,20 +244,20 @@ label c1_mu2:
     hide console
     hide door
     hide turn
-    "\[As the console shuts down, you swiftly open the armored boxes containing your confiscated equipment.\]"
+    "As the console shuts down, you swiftly open the armored boxes containing your confiscated equipment."
     play sound "cocking.mp3"
     menu:
         action "Every player gets all their weapon and gear cards back in hand and is now able to use them again."
         "Done":
-            show umbrasius at left
-            umbrasius "Their security system is compromised; I have access to their vault and my ship. I’ll pick up my crew members in the bar area and meet you onboard my ship."
+            show u at left
+            u "Their security system is compromised; I have access to their vault and my ship. I’ll pick up my crew members in the bar area and meet you onboard my ship."
             play sound "alarm.mp3"
-            umbrasius "It seems that the Hellfires have been alerted to your presence. But I assume that you’re capable of dealing with such trifles."
-            hide umbrasius
+            u "It seems that the Hellfires have been alerted to your presence. But I assume that you’re capable of dealing with such trifles."
+            hide u
             
     play music "blazing skies.mp3" fadeout 1.0
     menu:
-        action "Take 2 Thugs as Y1 and Y2 and 1 Guard as R1"
+        action "Take 2 Thugs as Y1 and Y2 and 1 Guard as R1."
         "Done":
             window hide
             show thug as y1 with moveinbottom:
@@ -270,7 +270,7 @@ label c1_mu2:
             show y2l with moveinbottom:
                 xpos 0.123 ypos 0.282
             pause
-            show guard as r1 with moveinbottom:
+            show g as r1 with moveinbottom:
                 xpos 0.398 ypos 0.779
                 xsize 78 ysize 78
             show r1l with moveinbottom:
@@ -279,7 +279,7 @@ label c1_mu2:
     
     window show
     menu:
-        action "Put the Apprehensive attack EBC on the red side on the table"
+        action "Put the Apprehensive attack EBC on the red side on the table."
         "Done":
             window hide
             if players >= 4:
@@ -295,12 +295,12 @@ label c1_mu2:
             
     window show
     
-    show aaron at right
-    aaron "Who are you? What are you doing in a restricted area? Did you not understand the rules you were given? I guess I’ll have to get my guards to give you a little reminder."
-    hide aaron
+    show a at right
+    a "Who are you? What are you doing in a restricted area? Did you not understand the rules you were given? I guess I’ll have to get my guards to give you a little reminder."
+    hide a
     
     menu:
-        "Introduction note:" "Eliminating, killing and destroying are all achieved by using weapons or abilities that deal damage to the enemies in question.\nRemember: When enemies appear, they always go first after the mission has been updated."
+        note "Eliminating, killing and destroying are all achieved by using weapons or abilities that deal damage to the enemies in question.\nRemember: When enemies appear, they always go first after the mission has been updated."
         
         "Success: Eliminate all ennemies":
             jump c1_mu3
@@ -319,22 +319,24 @@ label c1_mu3:
     hide y2l
     hide r1
     hide r1l
-    show umbrasius at left
-    umbrasius """
+    show u at left
+    u """
     We’re ready for take-off from hangar 17. Unfortunately, we have a situation here, as the Hellfires have locked the gangway door and placed our ship on a tractor beam.
     
     We won’t be going anywhere unless you can dispose of the pirates or disable the tractor beam from the control room. How you deal with it, is up to you.
     """
-    hide umbrasius
-    action "Remove 2 Blocked Entrances"
-    window hide
+    hide u
+    menu:
+        action "Remove the following 2 Blocked Entrances."
+        "Next":
+            window hide
     hide l2 with dissolve
     pause
     hide l3 with dissolve
     pause
     window show
     menu:
-        action "Take the ship box, 1 Door and 1 Console"
+        action "Take the ship box, 1 Door and 1 Console."
         "Done":
             window hide
             show ship with moveinleft:
@@ -348,7 +350,7 @@ label c1_mu3:
             pause
 
     menu:
-        action "Take 2 Thugs as Y1 and Y2 and 2 Guards as R1 and R2"
+        action "Take 2 Thugs as Y1 and Y2 and 2 Guards as R1 and R2."
         "Done":
             window hide
             show thug as y1 with moveinbottom:
@@ -361,20 +363,20 @@ label c1_mu3:
             show y2l with moveinbottom:
                 xpos 0.68 ypos 0.085
             pause
-            show guard as r1 with moveinbottom:
+            show g as r1 with moveinbottom:
                 xpos 0.05 ypos 0.375
                 xsize 78 ysize 78
             show r1l with moveinbottom:
                 xpos 0.05 ypos 0.375
             pause
-            show guard as r2 with moveinbottom:
+            show g as r2 with moveinbottom:
                 xpos 0.121 ypos 0.182
                 xsize 78 ysize 78
             show r2l with moveinbottom:
                 xpos 0.121 ypos 0.182
             pause
     menu:
-        action "Put the Disorganized attack EBC on the red side on the table"
+        action "Put the Disorganized attack EBC on the red side on the table."
         "Done":
             window hide
             if players >= 4:
@@ -389,15 +391,15 @@ label c1_mu3:
             pause
             
     menu:
-        action "Players may move up to 5 squares from their current spot"
+        action "Players may move up to 5 squares from their current spot."
         "Done":
             window show
-            show aaron at right
-            aaron "OK... for better or worse you now have my full attention, and you won’t be going anywhere when I’m through with you. You'll be an example for everyone to see of why you don't screw with the Hellfires."
-            hide aaron
+            show a at right
+            a "OK... for better or worse you now have my full attention, and you won’t be going anywhere when I’m through with you. You'll be an example for everyone to see of why you don't screw with the Hellfires."
+            hide a
     
     menu:
-        "When enemies appear, they always go first after the mission has been updated.\nThe ship is part of the map and can be boarded/exited by players only. Enemies will not move towards, or target, players already onboard the ship."
+        note "When enemies appear, they always go first after the mission has been updated.\nThe ship is part of the map and can be boarded/exited by players only. Enemies will not move towards, or target, players already onboard the ship."
         "Success: Open the door, disable the console, and get all players on board the ship.":
             jump c1_mu4a
         "Success: Eliminate all enemies.":
@@ -410,45 +412,48 @@ label c1_mu3:
             jump c1_play
     
 label c1_mu4a:
-    scene bg escape with fade:
+    scene bg escapeA with fade:
         fit "cover"
     play sound "spaceship.wav"
-    "\[As the ship escapes the atmosphere of Fury’s Fall, it all becomes quiet for a while as you settle down.\]"
-    show camreal at right
-    camreal "We’re in neutral space far from Fury’s Fall, no pursuers. Stand down from action stations. I'm plotting a route through the shadows of the planets in the habitable zone to screen any radiation bursts from the Suns. Should cut down the debris bump as well."
-    show umbrasius at left
-    umbrasius """
+    "As the ship escapes the atmosphere of Fury’s Fall, it all becomes quiet for a while as you settle down."
+    show c at right
+    c "We’re in neutral space far from Fury’s Fall, no pursuers. Stand down from action stations. I'm plotting a route through the shadows of the planets in the habitable zone to screen any radiation bursts from the Suns. Should cut down the debris bump as well."
+    show u at left
+    u """
     You and your team certainly didn’t disappoint, Commander. We’re in for a long and demanding undertaking, but your performance gives me confidence that we’ll be able to pull it off.
     
     Let's get the debrief over with, so we can continue the conversation about more important matters and get you all settled on the ship.
     """
     
-    hide camreal
-    hide umbrasius
+    hide c
+    hide u
     menu:
         "Did the team eliminate 1 or more enemies in last mission segment?"
         "Yes":
             jump end
         "No":
-            action "Everyone paints +1 in their legacy folder next to Hellfires."
+            menu:
+                action "Remove the following 2 Blocked Entrances"
+                "Next":
+                    jump end
     jump end
     
 label c1_mu4b:
-    scene bg escape with fade:
+    scene bg escapeB with fade:
         fit "cover"
     play sound "spaceship.wav"
-    "\[Leaving the gravitational pull of Fury’s Fall, everything becomes quiet as the cold dark space wraps around the ship.\]"
-    show camreal at right
-    camreal "This is the pilot speaking, we’re in neutral space with no pursuers, you may step down from your action stations. For the next several hours we’ll be cruising in the shadows of the planets in the habitable zone to avoid any sporadic radiation burst from the Suns."
-    show umbrasius at left
-    umbrasius """
+    "Leaving the gravitational pull of Fury’s Fall, everything becomes quiet as the cold dark space wraps around the ship."
+    show c at right
+    c "This is the pilot speaking, we’re in neutral space with no pursuers, you may step down from your action stations. For the next several hours we’ll be cruising in the shadows of the planets in the habitable zone to avoid any sporadic radiation burst from the Suns."
+    show u at left
+    u """
     This is certainly one way to handle it, and your team did not disappoint on the scale of bloodshed. I’m confident that your skills will be a fine addition to my crew’s portfolio.
     
     Let’s get through the debrief, so we can continue the conversation about more important matters and get you all settled more permanently on the ship.
     """
     
-    hide umbrasius
-    hide camreal
+    hide u
+    hide c
     menu:
         action "Everyone paints -1 in their legacy folder next to Hellfires."
         "Done":
