@@ -121,6 +121,7 @@ label c1:
     """
 
 label c1_play:
+    play music "callista.mp3" if_changed fadein 5.0
     scene bg map001:
         fit "cover"
         xanchor 0 yanchor 0
@@ -387,10 +388,13 @@ label c1_mu3:
                     xpos 0.547 ypos 0.915 # 9 turn
             pause
             
-    window show
-    show aaron at right
-    aaron "OK... for better or worse you now have my full attention, and you won’t be going anywhere when I’m through with you. You'll be an example for everyone to see of why you don't screw with the Hellfires."
-    hide aaron
+    menu:
+        action "Players may move up to 5 squares from their current spot"
+        "Done":
+            window show
+            show aaron at right
+            aaron "OK... for better or worse you now have my full attention, and you won’t be going anywhere when I’m through with you. You'll be an example for everyone to see of why you don't screw with the Hellfires."
+            hide aaron
     
     menu:
         "When enemies appear, they always go first after the mission has been updated.\nThe ship is part of the map and can be boarded/exited by players only. Enemies will not move towards, or target, players already onboard the ship."
