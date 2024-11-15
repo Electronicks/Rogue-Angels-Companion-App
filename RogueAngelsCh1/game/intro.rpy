@@ -37,7 +37,7 @@ label intro:
         fit "cover"
     
     """
-    War is now spreading like wildire.
+    War is now spreading like wildfire.
     
     Stifled by the bureaucracy and paralysed by insurrection, The Assembly desperately tries to keep old grudges and new rivalries at bay. But unchecked greed, overweening pride, and perhaps something yet darker threaten to consume the galaxy.
     """

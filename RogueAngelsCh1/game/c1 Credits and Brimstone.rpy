@@ -36,7 +36,7 @@ label c1:
     scene bg vexation with fade:
         fit "cover"
 
-    " C1 – Credits and Brimstone" "Location: Vexation, Fury’s Fall, Brimstone Base.\nYear: 1001 ATA."
+    "C1 – Credits and Brimstone" "Location: Vexation, Fury’s Fall, Brimstone Base.\nYear: 1001 ATA."
     
     "The main entrance to the scorching sulfur-engulfed hangar area shuts behind you."
     
