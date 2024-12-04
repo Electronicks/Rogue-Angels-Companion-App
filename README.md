@@ -9,7 +9,7 @@ This is a visual novel style companion app for the board game Rogue Angels : Leg
 This projects aims at creating a companion application for RA that can replace the chapter book entirely. Other tabletop games like Mansions of Madness Second Edition use a companion app to reduce table clutter and deliver more immersive narrative thanks to the addition of music and sound effects. Companion Apps are great for campaign games particularly as it can track decisions, and obscure alternative or future effects, keeping the experience free of spoilers.
 
 ## How is this app made?
-This fan-made companion app uses the [Ren'Py Visual Novel Engine](www.renpy.org) under the [MIT license](https://www.renpy.org/doc/html/license.html) to create scenes and deliver instructions to the players to set up the board, display objectives and deliver the story of RA. Ren'Py uses python as the framework's programming language, but also has its own simplified scripting language, making it very easy to learn and contribute with only a summary knowledge of programming.
+This fan-made companion app uses the [Ren'Py Visual Novel Engine](https://www.renpy.org/) under the [MIT license](https://www.renpy.org/doc/html/license.html) to create scenes and deliver instructions to the players to set up the board, display objectives and deliver the story of RA. Ren'Py uses python as the framework's programming language, but also has its own simplified scripting language, making it very easy to learn and contribute with only a summary knowledge of programming.
 
 If you're interested to contribute to the project, contact me, Electronicks, on the [Sun Tzu Games Discord Server](https://discord.gg/KzHfDMRSWt)
 
